@@ -1,20 +1,35 @@
 <template>
-  <p :class="['todoItem', ]">
-      <input type="checkbox" />
+  <p :class="['todoItem', todoProps.completed ? 'is-completed' : '']">
+      <input 
+      type="checkbox" 
+      :checked="todoProps.completed" 
+      @:change="markItemCompleted()"
+      />
       {{ todoProps.title }}
-      <button class="del-btn">Delete</button>
+      <button class="del-btn" @click="deleteItem()">Delete</button>
   </p>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+// import { ref } from '@vue/reactivity'
+
 export default {
     name: 'TodoItem',
     props: ['todoProps'],
-    setup(){
-      const new_id = ref('my-new-id')
+    setup(props, context){
+      const markItemCompleted = () => {
+        // console.log(props.todoProps)
+        context.emit('item-completed', props.todoProps.id);
+      }
+
+      const deleteItem = () => {
+        context.emit('delete-item', props.todoProps.id)
+      }
+
+
       return{
-        new_id
+        markItemCompleted,
+        deleteItem
       }
     }
 }
@@ -22,7 +37,7 @@ export default {
 
 <style>
 
-.is-complete  {
+.is-completed  {
   text-decoration: line-through;
 }
 

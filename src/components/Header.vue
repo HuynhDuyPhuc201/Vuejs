@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>Tiêu đề</h1>
+    <h1>Việc cần làm</h1>
   </header>
 </template>
 
@@ -12,18 +12,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+h1{
+  text-align: center;
+  padding: 15px;
+  background: #888;
+  color: #fff;
+  margin: 0 0 10px 0;
 }
 </style>
