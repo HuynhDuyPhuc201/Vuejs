@@ -1,12 +1,14 @@
 <template>
 
-    <AddTodo />
+    <AddTodo 
+        @add-todo="addTodo"
+    />
     <TodoItem 
-    v-for="todo in TodoList" 
-    :key="todo.id" 
-    :todoProps = "todo"
-    @item-completed="markItemCompleted"
-    @delete-item="deleteTodo"
+        v-for="todo in TodoList" 
+        :key="todo.id" 
+        :todoProps = "todo"
+        @item-completed="markItemCompleted"
+        @delete-item="deleteTodo"
     />
     <!-- v-bind = :,   v-on: @  -->
 </template>
@@ -14,11 +16,13 @@
 <script>
 import { ref } from '@vue/reactivity'
 import TodoItem from './TodoItem.vue'
+import AddTodo from './AddTodo.vue'
 
 export default {
     name: 'TodoList',
     components:{
         TodoItem,
+        AddTodo,
     },
     setup(){
         const TodoList = ref([
@@ -39,13 +43,6 @@ export default {
             }, 
         ])
 
-        // const markItemCompleted = id => {
-        //     TodoList.value = TodoList.value.map(todo =>{
-        //         if (todo.id === id) todo.completed = !todo.completed;
-        //         return todo
-        //     })
-        //     console.log(id)
-        // }
         const markItemCompleted = id => {
             TodoList.value = TodoList.value.map(todo => {
                 if(todo.id === id) todo.completed = !todo.completed
@@ -56,10 +53,16 @@ export default {
         const deleteTodo = id => {
             TodoList.value = TodoList.value.filter(todo => todo.id !== id)
         }
+
+        const addTodo = newTodo => {
+            console.log(newTodo.id)
+            TodoList.value.push(newTodo)
+        }
         return {
             TodoList,
             markItemCompleted,
-            deleteTodo
+            deleteTodo,
+            addTodo
         }
     }
 }
