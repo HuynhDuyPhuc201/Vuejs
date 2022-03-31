@@ -3,9 +3,9 @@
       <input 
       type="checkbox" 
       :checked="todoProps.completed" 
-      @:change="markItemCompleted()"
+      @change="markItemCompleted()"
       />
-      {{ todoProps.title }}
+      {{ todoProps. title }}
       <button class="del-btn" @click="deleteItem()">Delete</button>
   </p>
 </template>
@@ -25,7 +25,6 @@ export default {
       const deleteItem = () => {
         context.emit('delete-item', props.todoProps.id)
       }
-
 
       return{
         markItemCompleted,
